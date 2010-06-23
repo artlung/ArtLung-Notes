@@ -1,3 +1,4 @@
+// Utility functions
 function S4() {
    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
 }
@@ -7,6 +8,8 @@ function guid() {
 function uniqueID() {
 	return 'id' + guid();
 }
+// SAVE is an object that will save state when passed in
+// has a lot of crud in it
 var STATE = {
 	guid: 'x'
 	, zIndexMax: 0
@@ -42,7 +45,9 @@ var STATE = {
 	}
 };
 
+// myOverlay global var
 var myOverlay;
+// Generate the configuration we need for the Ext.Draggable
 var getDraggableConfig = function(id) {
 	return {
 		// cancelSelector: ''
@@ -87,7 +92,7 @@ var getDraggableConfig = function(id) {
 
 
 Ext.setup({
-    icon: 'icon.png',
+    icon: 'icon.png', // TODO: graphics
     tabletStartupScreen: 'tablet_startup.png',
     phoneStartupScreen: 'phone_startup.png',
     glossOnIcon: false,
