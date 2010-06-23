@@ -1,0 +1,9 @@
+The idea is to be able to touch the screen, make a note, and be able to draag it around.
+
+The notes are persistent.
+
+v1 Uses jQuery
+
+v2 uses Sencha Touch
+
+It's a mess still, feedback welcome.
