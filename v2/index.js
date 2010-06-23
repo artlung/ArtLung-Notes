@@ -86,17 +86,17 @@ var getDraggableConfig = function(id) {
 				// nothing
 			}
 		},
-	    revert: false
+		revert: false
 	}
 }
 
 
 Ext.setup({
-    icon: 'icon.png', // TODO: graphics
-    tabletStartupScreen: 'tablet_startup.png',
-    phoneStartupScreen: 'phone_startup.png',
-    glossOnIcon: false,
-    onReady: function(){
+	icon: 'icon.png', // TODO: graphics
+	tabletStartupScreen: 'tablet_startup.png',
+	phoneStartupScreen: 'phone_startup.png',
+	glossOnIcon: false,
+	onReady: function(){
 
 		Ext.get('everything').on('click', function(e, t){
 
@@ -110,12 +110,12 @@ Ext.setup({
 				top: e.xy[1],
 				left: e.xy[0]
 			});
-	        var overlayTb = new Ext.Toolbar({
-	            dock: 'bottom',
+			var overlayTb = new Ext.Toolbar({
+				dock: 'bottom',
 				items: [{
-                    text: 'Save',
-                    ui: 'action',
-                    handler: function() {
+					text: 'Save',
+					ui: 'action',
+					handler: function() {
 						var elem = Ext.get(id);
 						elem.addClass('savedNote').dom.innerHTML = Ext.get('inputText').getValue();
 						STATE.save({
@@ -127,24 +127,24 @@ Ext.setup({
 						});
 						new Ext.util.Draggable(id, getDraggableConfig(id));
 						myOverlay.destroy();
-                    }
-                }]
-	        });
+					}
+				}]
+			});
 
-	        myOverlay = new Ext.Panel({
-	            floating: true,
-	            modal: true,
-	            centered: true,
-	            width: Ext.platform.isPhone ? 260 : 400,
-	            height: Ext.platform.isPhone ? 220 : 400,
-	            styleHtmlContent: true,
-	            dockedItems: overlayTb,
-	            scroll: 'vertical',
-	            // contentEl: 'hiddenForm',
+			myOverlay = new Ext.Panel({
+				floating: true,
+				modal: true,
+				centered: true,
+				width: Ext.platform.isPhone ? 260 : 400,
+				height: Ext.platform.isPhone ? 220 : 400,
+				styleHtmlContent: true,
+				dockedItems: overlayTb,
+				scroll: 'vertical',
+				// contentEl: 'hiddenForm',
 				html: "<form action='.' method='POST'><textarea id='inputText' style='width: "+(Ext.platform.isPhone ? 200 : 340)+"px;height: "+(Ext.platform.isPhone ? 160 : 340)+"px'><\/textarea><\/form>",
-	            cls: 'htmlcontent'
-	        });
-            myOverlay.show();
+				cls: 'htmlcontent'
+			});
+			myOverlay.show();
 
 		
 		} );
@@ -162,13 +162,13 @@ Ext.setup({
 			// 		alert(h);
 			// 		div.setStyle({
 			// 			height: (div2.clientHeight)
-			// 		});     // element just got scrollbars
+			// 		});	 // element just got scrollbars
 			// 	}
 			// }
 			
 		});
 
-    }
+	}
 
 
 
