@@ -18,6 +18,9 @@ var STATE = {
 		this.zIndexMax += 1;
 		return this.zIndexMax;
 	}
+	, saveLocalStorage: function(params) {
+		// TODO: use localstorage instead
+	}
 	, saveExtAjax: function(params){
 		Ext.Ajax.request({
 			url: 'save.php',
@@ -143,16 +146,11 @@ Ext.setup({
 		// initialize the saved notes
 		Ext.select('div.savedNote').each(function(){
 			var id = this.getAttribute('id');
-
-			var div = this;
-			var div2 = document.getElementById(id);
-			this.setStyle({
-				height: '10px'
-			});
-			// alert(div.getHeight());
-			// alert(document.getElementById(id).clientHeight);
-			// TODO I want to right-size these elements!
+			// make draggable
+			new Ext.util.Draggable(id, getDraggableConfig(id));
+			// TODO I want to right-size the .savedNote elements
 			
+			// Something like this?
 			// if ( div.getWidth() !== div2.clientWidth || div.getHeight() () !== div2.clientHeight ) {
 			// 	while (div.getWidth() !== div2.clientWidth || div.getHeight() () !== div2.clientHeight) {
 			// 		// var h = div.getHeight() + 2;
@@ -162,10 +160,7 @@ Ext.setup({
 			// 		});     // element just got scrollbars
 			// 	}
 			// }
-
-
-			// fix the height
-			new Ext.util.Draggable(id, getDraggableConfig(id));
+			
 		});
 
     }
