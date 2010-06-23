@@ -98,12 +98,13 @@ $(document).ready(function() {
 			STATE.save();
 		}
 	});
-	
-	// .each(function(){
+
+	// TODO RIGHTSIZING AN ELEMENT
+	// $('.savedNote').each(function(){
 	// 	var div = $(this);
 	// 	// div.css({'height':'10px'});
-	// 	if ( div.width() !== div[0].clientWidth || div.height () !== div[0].clientHeight ) {
-	// 		while (div.width() !== div[0].clientWidth || div.height () !== div[0].clientHeight) {
+	// 	if ( div.width() !== div.clientWidth || div.height() !== div.clientHeight ) {
+	// 		while (div.width() !== div.clientWidth || div.height() !== div.clientHeight) {
 	// 			var h = div.height() + 10;
 	// 			STATE.height = h;
 	// 			div.css({
@@ -112,16 +113,6 @@ $(document).ready(function() {
 	// 		}
 	// 	}
 	// })
-	
-	// .touch({
-	// 		animate: false,
-	// 		sticky: false,
-	// 		dragx: true,
-	// 		dragy: true,
-	// 		rotate: false,
-	// 		resort: true,
-	// 		scale: false
-	// });
 
 });
 </script>
