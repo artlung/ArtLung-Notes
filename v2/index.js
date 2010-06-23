@@ -149,10 +149,9 @@ Ext.setup({
 			this.setStyle({
 				height: '10px'
 			});
-			// alert(div.getWidth());
-			// alert(div.clientWidth);
-			alert(div.getHeight());
-			alert(document.getElementById(id).clientHeight);
+			// alert(div.getHeight());
+			// alert(document.getElementById(id).clientHeight);
+			// TODO I want to right-size these elements!
 			
 			// if ( div.getWidth() !== div2.clientWidth || div.getHeight() () !== div2.clientHeight ) {
 			// 	while (div.getWidth() !== div2.clientWidth || div.getHeight() () !== div2.clientHeight) {

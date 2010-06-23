@@ -1,0 +1,40 @@
+/* line 4, ../../sass/src/carousel.scss */
+.x-carousel {
+  position: relative;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical; }
+  /* line 10, ../../sass/src/carousel.scss */
+  .x-carousel > .x-scroller {
+    -webkit-box-flex: 1;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal; }
+
+/* line 17, ../../sass/src/carousel.scss */
+.x-carousel-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  padding-top: 4px;
+  z-index: 1;
+  vertical-align: middle;
+  text-align: center; }
+  /* line 28, ../../sass/src/carousel.scss */
+  .x-carousel-indicator span {
+    width: 8px;
+    height: 8px;
+    -webkit-border-radius: 4px;
+    display: inline-block;
+    margin: 0px 3px;
+    background-color: rgba(0, 0, 0, 0.3); }
+    /* line 36, ../../sass/src/carousel.scss */
+    .x-carousel-indicator span.x-carousel-indicator-active {
+      background-color: black; }
+  /* line 41, ../../sass/src/carousel.scss */
+  .x-carousel-indicator.x-carousel-indicator-light span {
+    background-color: rgba(255, 255, 255, 0.3); }
+    /* line 44, ../../sass/src/carousel.scss */
+    .x-carousel-indicator.x-carousel-indicator-light span.x-carousel-indicator-active {
+      background-color: white; }
