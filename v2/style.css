@@ -11,7 +11,7 @@ body {
 .instance {
 	background-color: #ccc;
 	position: absolute;
-	height: 120px;
+/*	height: 120px;*/
 	width: 210px;
 	text-align: center;
 	vertical-align: middle;
