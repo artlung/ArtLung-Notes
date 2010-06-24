@@ -17,6 +17,7 @@ var STATE = {
 	, left: 0
 	, height: 0
 	, content: ''
+	, workingAreaId: 'everything'
 	, localStorageKey: 'artlungNotes'
 	, frontMostZIndex: function() {
 		this.zIndexMax += 1;
@@ -33,8 +34,7 @@ var STATE = {
 		var outstr = '';
 		for(key in notes) {
 			var $item = notes[key];
-			"+ +"
-			outstr += "<div class=\"instance savedNote\" id=\""+$item['guid']+"\" style=\"top:"+$item['top']+"px;left:"+$item['left']+"px;/*height:"+$item['height']+"px;*/\">";
+			outstr += "<div class=\"instance savedNote\" id=\""+$item['guid']+"\" style=\"top:"+$item['top']+"px;left:"+$item['left']+"px;/*height:"+$item['height']+"px;*/\">"; // not using height
 			outstr += $item['content'];
 			outstr += "<\/div>\n";
 		}
@@ -84,7 +84,7 @@ var myOverlay;
 var getDraggableConfig = function(id) {
 	return {
 		// cancelSelector: ''
-		constrain: 'everything',
+		constrain: STATE.workingAreaId,
 		delay: 0,
 		direction: 'both',
 		disabled: false,
@@ -131,14 +131,14 @@ Ext.setup({
 	glossOnIcon: false,
 	onReady: function(){
 
-		Ext.get('everything').on('click', function(e, t){
+		Ext.get(STATE.workingAreaId).on('click', function(e, t){
 
-			if (t.getAttribute('id') !== 'everything') {
+			if (t.getAttribute('id') !== STATE.workingAreaId) {
 				return;
 			}
 		
 			var id = uniqueID();
-			var newDiv = Ext.DomHelper.append('everything', {tag : 'div', id :id , cls : 'instance', html: '&nbsp;'});
+			var newDiv = Ext.DomHelper.append(STATE.workingAreaId, {tag : 'div', id :id , cls : 'instance', html: '&nbsp;'});
 			Ext.get(id).setStyle({
 				top: e.xy[1],
 				left: e.xy[0]
