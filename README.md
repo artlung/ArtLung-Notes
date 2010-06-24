@@ -8,9 +8,9 @@ The notes are persistent.
 	- saves to php encoded json files
 
 - v2 uses Sencha Touch/ExtJS
-	- reads from php encoded json files
-	- saves to php encoded json files
 	- saves to window.localStorage
-	- TODO: have it also read from localStorage
+	- reads from localStorage
+	- reads from php encoded json files _COMMENTED OUT_
+	- saves to php encoded json files _COMMENTED OUT_
 
 It's a work in progress and ideas are welcome.
