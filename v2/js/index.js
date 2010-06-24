@@ -1,29 +1,31 @@
-// Utility functions
-function S4() {
-   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-}
-function guid() {
-   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
-function uniqueID() {
-	return 'id' + guid();
-}
-// SAVE is an object that will save state when passed in
-// has a lot of crud in it
 var STATE = {
-	guid: 'x'
-	, zIndexMax: 0
+	guid: '_'
+	, USELOCALSTORAGE: true // at least one of these must be true
+	, USEPHPSTORAGE: true // at least one of these must be true
+	, zIndexMax: 1
 	, top: 0
 	, left: 0
 	, height: 0
 	, content: ''
 	, workingAreaId: 'everything'
 	, localStorageKey: 'artlungNotes'
+	, createUniqueId: function() {
+		return '_' + this.guid();
+	}
+	, guid: function(){
+	   return (this._S4()+this._S4()+"-"+this._S4()+"-"+this._S4()+"-"+this._S4()+"-"+this._S4()+this._S4()+this._S4());
+	}
+	, _S4: function() {
+	   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	}
 	, frontMostZIndex: function() {
 		this.zIndexMax += 1;
 		return this.zIndexMax;
 	}
-	, getSavedNotes: function() {
+	, getSavedNotesPhp: function() {
+		// TODO: include function to grab files from load.php
+	}
+	, getSavedNotesLocalStorage: function() {
 		var key = this.localStorageKey;
 		var notes = window.localStorage.getItem(key);
 		if (notes === null) {
@@ -38,7 +40,14 @@ var STATE = {
 			outstr += $item['content'];
 			outstr += "<\/div>\n";
 		}
-		return outstr;
+		return outstr;	}
+	, getSavedNotes: function() {
+		if (this.USELOCALSTORAGE) {
+			return this.getSavedNotesLocalStorage();
+		}
+		//  else if (this.USEPHPSTORAGE) {
+		// 	this.saveExtAjax(params);
+		// }
 	}
 	, localStorageOk: function() {
 		return ('localStorage' in window) && window['localStorage'] !== null;
@@ -73,13 +82,18 @@ var STATE = {
 		});
 	}
 	, save: function(params){
-		this.saveExtAjax(params);
-		this.saveLocalStorage(params);
+		if (this.USELOCALSTORAGE) {
+			this.saveLocalStorage(params);
+		} 
+		if (this.USEPHPSTORAGE) {
+			this.saveExtAjax(params);
+		}
 	}
 };
 
 // myOverlay global var
 var myOverlay;
+
 // Generate the configuration we need for the Ext.Draggable
 var getDraggableConfig = function(id) {
 	return {
@@ -92,14 +106,14 @@ var getDraggableConfig = function(id) {
 		// group: 'base',
 		listeners: {
 			dragstart: function() {
-				// nothing
+				// not even sure these are doing anything
 				var elem = Ext.get(id);
 				elem.setStyle({
 					zIndex: STATE.frontMostZIndex()
 				});
 			},
 			touch:  function() {
-				// nothing
+				// not even sure these are doing anything
 				var elem = Ext.get(id);
 				elem.setStyle({
 					zIndex: STATE.frontMostZIndex()
@@ -112,11 +126,12 @@ var getDraggableConfig = function(id) {
 					top : elem.getTop(),
 					left : elem.getLeft(),
 					content : elem.dom.innerHTML,
-					height : elem.getHeight()
+					height : elem.getHeight() // actually not using this anymore
 				});
 			},
 			drag: function() {
-				// nothing
+				// not even sure these are doing anything
+				// not sure what to here
 			}
 		},
 		revert: false
@@ -126,8 +141,8 @@ var getDraggableConfig = function(id) {
 
 Ext.setup({
 	icon: 'icon.png', // TODO: graphics
-	tabletStartupScreen: 'tablet_startup.png',
-	phoneStartupScreen: 'phone_startup.png',
+	tabletStartupScreen: 'tablet_startup.png', // TODO: graphics
+	phoneStartupScreen: 'phone_startup.png', // TODO: graphics
 	glossOnIcon: false,
 	onReady: function(){
 
@@ -137,7 +152,7 @@ Ext.setup({
 				return;
 			}
 		
-			var id = uniqueID();
+			var id = STATE.createUniqueId();
 			var newDiv = Ext.DomHelper.append(STATE.workingAreaId, {tag : 'div', id :id , cls : 'instance', html: '&nbsp;'});
 			Ext.get(id).setStyle({
 				top: e.xy[1],
