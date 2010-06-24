@@ -1,9 +1,8 @@
 <html>
 <head>
-<title>Board</title>
+<title>ArtLung Notes v1</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" type="text/javascript"></script>
-<!-- <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="screen"> -->
 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
 <script type="text/javascript" src="javascript.js"></script>
 <script type="text/javascript" src="jquery.touch.js"></script>
@@ -98,21 +97,6 @@ $(document).ready(function() {
 			STATE.save();
 		}
 	});
-
-	// TODO RIGHTSIZING AN ELEMENT
-	// $('.savedNote').each(function(){
-	// 	var div = $(this);
-	// 	// div.css({'height':'10px'});
-	// 	if ( div.width() !== div.clientWidth || div.height() !== div.clientHeight ) {
-	// 		while (div.width() !== div.clientWidth || div.height() !== div.clientHeight) {
-	// 			var h = div.height() + 10;
-	// 			STATE.height = h;
-	// 			div.css({
-	// 				height: (h) + 'px'
-	// 			});     // element just got scrollbars
-	// 		}
-	// 	}
-	// })
 
 });
 </script>
