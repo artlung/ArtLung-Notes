@@ -17,12 +17,44 @@ var STATE = {
 	, left: 0
 	, height: 0
 	, content: ''
+	, localStorageKey: 'artlungNotes'
 	, frontMostZIndex: function() {
 		this.zIndexMax += 1;
 		return this.zIndexMax;
 	}
+	, getSavedNotes: function() {
+		var key = this.localStorageKey;
+		var notes = window.localStorage.getItem(key);
+		if (notes === null) {
+			window.localStorage.setItem(key, '{}');
+		} else {
+			notes = Ext.decode(notes);
+		}
+		var outstr = '';
+		for(key in notes) {
+			var $item = notes[key];
+			"+ +"
+			outstr += "<div class=\"instance savedNote\" id=\""+$item['guid']+"\" style=\"top:"+$item['top']+"px;left:"+$item['left']+"px;/*height:"+$item['height']+"px;*/\">";
+			outstr += $item['content'];
+			outstr += "<\/div>\n";
+		}
+		return outstr;
+	}
+	, localStorageOk: function() {
+		return ('localStorage' in window) && window['localStorage'] !== null;
+	}
 	, saveLocalStorage: function(params) {
-		// TODO: use localstorage instead
+		var key = this.localStorageKey;
+		// window.localStorage.removeItem(key);
+		// window.localStorage.clear();
+		var notes = window.localStorage.getItem(key);
+		if (notes === null) {
+			window.localStorage.setItem(key, '{}');
+		} else {
+			notes = Ext.decode(notes);
+		}
+		notes[params.guid] = params;
+		window.localStorage.setItem(key, Ext.encode(notes));
 	}
 	, saveExtAjax: function(params){
 		Ext.Ajax.request({
@@ -42,6 +74,7 @@ var STATE = {
 	}
 	, save: function(params){
 		this.saveExtAjax(params);
+		this.saveLocalStorage(params);
 	}
 };
 
@@ -105,7 +138,7 @@ Ext.setup({
 			}
 		
 			var id = uniqueID();
-			var newDiv = Ext.DomHelper.append('everything', {tag : 'div', id :id , cls : 'instance', });
+			var newDiv = Ext.DomHelper.append('everything', {tag : 'div', id :id , cls : 'instance', html: '&nbsp;'});
 			Ext.get(id).setStyle({
 				top: e.xy[1],
 				left: e.xy[0]
@@ -153,18 +186,6 @@ Ext.setup({
 			var id = this.getAttribute('id');
 			// make draggable
 			new Ext.util.Draggable(id, getDraggableConfig(id));
-			// TODO I want to right-size the .savedNote elements
-			
-			// Something like this?
-			// if ( div.getWidth() !== div2.clientWidth || div.getHeight() () !== div2.clientHeight ) {
-			// 	while (div.getWidth() !== div2.clientWidth || div.getHeight() () !== div2.clientHeight) {
-			// 		// var h = div.getHeight() + 2;
-			// 		alert(h);
-			// 		div.setStyle({
-			// 			height: (div2.clientHeight)
-			// 		});	 // element just got scrollbars
-			// 	}
-			// }
 			
 		});
 
